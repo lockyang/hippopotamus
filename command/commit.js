@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const { gitAdd, gitCommit, gitPush } = require('../lib/git');
+const git = require('../lib/git');
 const ora = require('ora');
 
 const emojiList = {
@@ -52,16 +52,20 @@ const describePrompt = {
 }
 
 const commit = async () => {
-  await gitAdd();
+  const { stdout } = await git.gitCheck();
+  if (!stdout) {
+    return console.log('nothing change');
+  }
+  await git.gitAdd();
 
   const { type } = await inquirer.prompt(commitPrompt);
   const { describe } = await inquirer.prompt(describePrompt);
-  await gitCommit(`${emojiList[type]}${describe}`);
+  await git.gitCommit(`${emojiList[type]}${describe}`);
 
   const { confirmPush } = await inquirer.prompt(pushPrompt);
   if (confirmPush) {
     const doing = ora('i\'m working').start()
-    await gitPush();
+    await git.gitPush();
     doing.stop();
     console.log('git push 成功')
   }
