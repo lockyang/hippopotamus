@@ -35,7 +35,7 @@ const commitPrompt = [{
 const pushPrompt = {
   type: 'confirm',
   name: 'confirmPush',
-  message: '是否push到远端'
+  message: '是否推送到远端'
 }
 
 const describePrompt = {
