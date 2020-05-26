@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const { gitAdd, gitCommit, gitPush } = require('../lib/git');
+const ora = require('ora');
 
 const emojiList = {
   Bugfix: '🐛 [bug] ',
@@ -59,7 +60,9 @@ const commit = async () => {
 
   const { confirmPush } = await inquirer.prompt(pushPrompt);
   if (confirmPush) {
+    const doing = ora('i\'m working').start()
     await gitPush();
+    doing.stop();
     console.log('git push 成功')
   }
 }
