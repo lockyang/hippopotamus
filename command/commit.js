@@ -60,6 +60,7 @@ const commit = async () => {
   const { confirmPush } = await inquirer.prompt(pushPrompt);
   if (confirmPush) {
     await gitPush();
+    console.log('git push 成功')
   }
 }
 
