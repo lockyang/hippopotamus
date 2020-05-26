@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const inquirer = require('inquirer');
 const { commit } = require('./command/commit');
 const { tag } = require('./command/tag.js');
