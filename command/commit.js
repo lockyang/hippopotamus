@@ -72,22 +72,25 @@ const describePrompt = {
 }
 
 const commit = async () => {
+  // step1: check status
   const { stdout } = await git.status();
-  console.log(stdout);
-  return '';
-  if (!stdout) {
+  if (stdout.match('nothing to commit, working tree clean')) {
     return console.log(
       color.red('😿 没有需要提交的文件')
     );
   }
+
+  // step2: add files to stages
   await git.add();
 
+  // step3: write commite
   const { type } = await inquirer.prompt(commitPrompt);
   const { describe } = await inquirer.prompt(describePrompt);
   await git.commit(`${emojiList[type]}${describe}`);
 
   const { confirmPush } = await inquirer.prompt(pushPrompt);
   if (confirmPush) {
+    // step4: push stages to remote
     const doing = ora(msg.pushing).start()
     await git.push();
     doing.stop();
