@@ -52,20 +52,20 @@ const describePrompt = {
 }
 
 const commit = async () => {
-  const { stdout } = await git.gitCheck();
+  const { stdout } = await git.diffCheck();
   if (!stdout) {
     return console.log('nothing change');
   }
-  await git.gitAdd();
+  await git.add();
 
   const { type } = await inquirer.prompt(commitPrompt);
   const { describe } = await inquirer.prompt(describePrompt);
-  await git.gitCommit(`${emojiList[type]}${describe}`);
+  await git.commit(`${emojiList[type]}${describe}`);
 
   const { confirmPush } = await inquirer.prompt(pushPrompt);
   if (confirmPush) {
     const doing = ora('i\'m working').start()
-    await git.gitPush();
+    await git.push();
     doing.stop();
     console.log('git push 成功')
   }
