@@ -11,3 +11,7 @@
 
 ## 为什么commit还是这么脏
 1. 别问 问就是不知道。
+
+## 参考文档
+1. [semver官方文档](https://semver.org/)
+2. [git文档](https://git-scm.com/doc)
