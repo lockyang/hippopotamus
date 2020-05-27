@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const git = require('../lib/git');
 const ora = require('ora');
+const color = require('colors/safe');
 
 const emojiList = {
   Bugfix: '🐛 [bug] ',
@@ -51,7 +52,7 @@ const commitPrompt = [{
 const pushPrompt = {
   type: 'confirm',
   name: 'confirmPush',
-  message: '是否推送到远端'
+  message: '是否推送到远端 ❓'
 }
 
 const describePrompt = {
@@ -60,7 +61,9 @@ const describePrompt = {
   message: '请输入commit具体描述',
   validate: input => {
     if (!input) {
-      console.log('请简略描述commit内容')
+      console.log(
+        color.red('🚓 请简略描述commit内容')
+      )
       return false;
     }
     return true;
@@ -70,7 +73,9 @@ const describePrompt = {
 const commit = async () => {
   const { stdout } = await git.diffCheck();
   if (!stdout) {
-    return console.log('nothing change');
+    return console.log(
+      color.red('😿 没有需要提交的文件')
+    );
   }
   await git.add();
 
@@ -80,10 +85,10 @@ const commit = async () => {
 
   const { confirmPush } = await inquirer.prompt(pushPrompt);
   if (confirmPush) {
-    const doing = ora('i\'m working').start()
+    const doing = ora('🚧 正在推送到远端').start()
     await git.push();
     doing.stop();
-    console.log('git push 成功')
+    console.log('😁 成功推送到远端');
   }
 }
 
