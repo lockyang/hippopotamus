@@ -7,9 +7,16 @@ const emojiList = {
   NewFeature: '✨  [feature] ',
   Documentation: '📚  [document] ',
   Refactoring: '📦  [refact] ',
+  Style: '💄 [Style]',
   Tooling: '🔧  [config] ',
+  Develop: '🚧 [develop]',
+  Lint: '🎨 [lint]',
+  Test: '✅ [Test]'
 }
-
+/**
+ * 参考 https://github.com/liuchengxu/git-commit-emoji-cn
+ * emoji也太他妈多了...
+ */
 const commitPrompt = [{
   type: 'list',
   name: 'type',
@@ -21,6 +28,12 @@ const commitPrompt = [{
     name: '✨  新特性',
     value: 'NewFeature'
   }, {
+    name: '💄 样式修改',
+    value: 'Style'
+  }, {
+    name: '🚧 工作进行中',
+    value: 'Develop',
+  }, {
     name: '📚  文档',
     value: 'Documentation'
   }, {
@@ -29,6 +42,12 @@ const commitPrompt = [{
   }, {
     name: '🔧  配置',
     value: 'Tooling'
+  }, {
+    name: '🎨 代码结构/格式',
+    value: 'Lint'
+  }, {
+    name: '✅ 测试相关',
+    value: 'Test',
   }]
 }]
 
