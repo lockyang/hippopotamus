@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const ora = require('ora');
 const git = require('../lib/git');
 const { generateTag } = require('../lib/helper');
+const msg = require('./msg');
 
 const tag = async () => {
   const { stdout } = await git.tagList();
@@ -53,12 +54,13 @@ const tag = async () => {
     type: 'confirm',
     default: true,
     name: 'push',
-    message: '是否推送Tag到远端'
+    message: msg.pushRemote,
   })
   if (push) {
-    const doing = ora('正在推送Tag至远端').start();
+    const doing = ora(msg.pushing).start();
     await git.tagPush(result);
     doing.stop();
+    console.log(msg.pushSuccess);
   }
 }
 

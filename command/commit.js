@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const git = require('../lib/git');
 const ora = require('ora');
 const color = require('colors/safe');
+const msg = require('./msg');
 
 const emojiList = {
   Bugfix: '🐛 [bug] ',
@@ -52,7 +53,7 @@ const commitPrompt = [{
 const pushPrompt = {
   type: 'confirm',
   name: 'confirmPush',
-  message: '是否推送到远端 ❓'
+  message: '是否推送Commit到远端 ❓'
 }
 
 const describePrompt = {
@@ -85,10 +86,10 @@ const commit = async () => {
 
   const { confirmPush } = await inquirer.prompt(pushPrompt);
   if (confirmPush) {
-    const doing = ora('🚧 正在推送到远端').start()
+    const doing = ora(msg.pushing).start()
     await git.push();
     doing.stop();
-    console.log('😁 成功推送到远端');
+    console.log(msg.pushSuccess);
   }
 }
 
