@@ -4,6 +4,7 @@
   "main": "index.js",
   "author": "",
   "license": "ISC",
+  "keywords": ["git", "emoji"],
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/lockyang/hippopotamus.git"
