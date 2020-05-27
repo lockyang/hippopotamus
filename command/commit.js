@@ -6,7 +6,7 @@ const emojiList = {
   Bugfix: '🐛 [bug] ',
   NewFeature: '✨  [feature] ',
   Documentation: '📚  [document] ',
-  Refactoring: '📦  [refact] ',
+  // Refactoring: '📦  [refact] ',
   Style: '💄 [Style]',
   Tooling: '🔧  [config] ',
   Develop: '🚧 [develop]',
@@ -36,9 +36,6 @@ const commitPrompt = [{
   }, {
     name: '📚  文档',
     value: 'Documentation'
-  }, {
-    name: '📦  重构',
-    value: 'Refactoring'
   }, {
     name: '🔧  配置',
     value: 'Tooling'
