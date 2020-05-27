@@ -72,7 +72,9 @@ const describePrompt = {
 }
 
 const commit = async () => {
-  const { stdout } = await git.diffCheck();
+  const { stdout } = await git.status();
+  console.log(stdout);
+  return '';
   if (!stdout) {
     return console.log(
       color.red('😿 没有需要提交的文件')
