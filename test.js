@@ -15,5 +15,3 @@ const test = async () => {
 };
 
 test();
-
-
